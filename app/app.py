@@ -2,6 +2,9 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
 
 import sys
 import io
@@ -124,8 +127,9 @@ with tab1:
                     
                 st.write(result.get("answer", ""))
                 for quote in result.get("supporting_quotes", []):
+                    ts_str = f" @ {quote['timestamp']}" if quote.get('timestamp') and quote['timestamp'] != "unknown" else ""
                     st.markdown(
-                        f"> \"{quote['quote']}\" — *{quote['speaker']}, {quote['transcript_id']} @ {quote['timestamp']}*"
+                        f"> \"{quote['quote']}\" — *{quote['speaker']}, {quote['transcript_id']}{ts_str}*"
                     )
                 if result.get("unverified_dropped"):
                     st.caption(f"({result['unverified_dropped']} unverified quote(s) from the model were dropped)")
@@ -167,8 +171,9 @@ with tab3:
             
         st.write(result.get("answer", ""))
         for quote in result.get("supporting_quotes", []):
+            ts_str = f" @ {quote['timestamp']}" if quote.get('timestamp') and quote['timestamp'] != "unknown" else ""
             st.markdown(
-                f"> \"{quote['quote']}\" — *{quote['speaker']}, {quote['transcript_id']} @ {quote['timestamp']}*"
+                f"> \"{quote['quote']}\" — *{quote['speaker']}, {quote['transcript_id']}{ts_str}*"
             )
 
 # ---- Tab 4: Browse ----
@@ -177,4 +182,5 @@ with tab4:
     view_tid = st.selectbox("Transcript", transcript_ids, key="browse")
     for seg in index.segments:
         if seg["transcript_id"] == view_tid:
-            st.markdown(f"**[{seg['timestamp']}] {seg['speaker']}:** {seg['text']}")
+            ts_str = f"[{seg['timestamp']}] " if seg['timestamp'] and seg['timestamp'] != "unknown" else ""
+            st.markdown(f"**{ts_str}{seg['speaker']}:** {seg['text']}")

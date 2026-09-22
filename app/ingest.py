@@ -62,8 +62,8 @@ def get_lines_from_file(path: str):
             return [ln.strip() for ln in f if ln.strip()]
 
 
-def parse_transcript(path: str):
-    name = os.path.splitext(os.path.basename(path))[0]
+def parse_transcript(path: str, transcript_name: str = None):
+    name = transcript_name or os.path.splitext(os.path.basename(path))[0]
     segments = []
     lines = get_lines_from_file(path)
 

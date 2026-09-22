@@ -58,7 +58,8 @@ def process_file(ch, method, properties, body):
         minio_client.fget_object(BUCKET_NAME, object_name, tmp_path)
         
         # Parse using existing regex logic
-        segs = parse_transcript(tmp_path)
+        original_name = os.path.splitext(object_name)[0]
+        segs = parse_transcript(tmp_path, transcript_name=original_name)
         
         points = []
         texts = [s["text"] for s in segs]

@@ -4,6 +4,9 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
 
 import re
 from collections import defaultdict
@@ -285,9 +288,9 @@ Respond as JSON:
     judge_result = judge_answer(provider, api_key, question, excerpts, parsed.get("answer", ""))
     parsed["judge_result"] = judge_result
 
-    # Store in cache for 24 hours
+    # Store in cache for 2 days (172800 seconds)
     if redis_client and cache_key:
-        redis_client.setex(cache_key, 86400, json.dumps(parsed))
+        redis_client.setex(cache_key, 172800, json.dumps(parsed))
         
     return parsed
 
