@@ -1,0 +1,25 @@
+# Environments
+.env
+.env.*
+!.env.example
+.venv
+venv/
+env/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Project specific
+data/
+segments.json
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
