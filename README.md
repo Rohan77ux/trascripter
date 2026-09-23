@@ -29,14 +29,21 @@ This project has been upgraded from a simple in-memory script to a robust, scala
 
 ## Setup & Execution
 
-### 1. Launch the Platform
+### 1. Install Dependencies (Optional for IDEs)
+While Docker handles its own dependencies, you can install them locally for your IDE:
+
+```bash
+pip install -r requirements.txt
+```
+
+### 2. Launch the Platform
 The entire infrastructure (Streamlit, Background Worker, Qdrant, MinIO, RabbitMQ, Redis) is fully containerized. To start everything, simply run:
 
 ```bash
 docker-compose up -d --build
 ```
 
-### 2. Access the Application
+### 3. Access the Application
 - **Streamlit UI:** Open your browser to `http://localhost:8501`.
 - **MinIO Console:** Available at `http://localhost:9001` (User: `minioadmin`, Pass: `minioadmin`)
 
