@@ -28,39 +28,16 @@ This project has been upgraded from a simple in-memory script to a robust, scala
 
 ## Setup & Execution
 
-### 1. Start the Docker Infrastructure
-Ensure you have Docker and Docker Compose installed.
+### 1. Launch the Platform
+The entire infrastructure (Streamlit, Background Worker, Qdrant, MinIO, RabbitMQ, Redis) is fully containerized. To start everything, simply run:
 
 ```bash
-# Start MinIO, RabbitMQ, Redis, and Qdrant in the background
-docker-compose up -d
-```
-*Note: MinIO Console is available at http://localhost:9001 (User: `minioadmin`, Pass: `minioadmin`)*
-
-### 2. Install Python Dependencies
-It is recommended to use a virtual environment.
-
-```bash
-pip install -r requirements.txt
+docker-compose up -d --build
 ```
 
-### 3. Start the Background Worker
-In a new terminal tab, start the ingestion worker so it can listen to RabbitMQ for new files:
-
-```bash
-export KMP_DUPLICATE_LIB_OK=TRUE
-python app/worker.py
-```
-
-### 4. Start the Application
-In another terminal tab, start the Streamlit UI:
-
-```bash
-export KMP_DUPLICATE_LIB_OK=TRUE
-streamlit run app/app.py
-```
-
-Open your browser to `http://localhost:8501`.
+### 2. Access the Application
+- **Streamlit UI:** Open your browser to `http://localhost:8501`.
+- **MinIO Console:** Available at `http://localhost:9001` (User: `minioadmin`, Pass: `minioadmin`)
 
 ## Usage
 1. In the sidebar, select your preferred **AI Provider** (e.g., Anthropic, OpenAI, Groq, Gemini).
