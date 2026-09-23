@@ -1,5 +1,6 @@
 # Expert Call Transcript Analyzer — Advanced RAG
 
+**Repository:** [https://github.com/Rohan77ux/trascripter](https://github.com/Rohan77ux/trascripter)
 ## What this does
 Analyzes expert-call transcripts (.txt, .pdf) by using an advanced Retrieval-Augmented Generation (RAG) pipeline:
 1. **Answers interview-guide questions** per expert or across all experts.
